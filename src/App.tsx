@@ -1,11 +1,16 @@
 import { FunctionComponent } from 'react'
-import Header from './components/header/header.component'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+// Pages
+import HomePage from './pages/home/Home.page'
 
 const App: FunctionComponent = () => {
   return (
-    <>
-      <Header />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
