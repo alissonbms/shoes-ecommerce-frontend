@@ -1,13 +1,71 @@
-.header-container {
+header {
   width: 100%;
-  background-color: #212529;
+  position: absolute;
+  top: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
-  padding: 20px;
-  color: #f8f9fa;
+  padding: 20px 14%;
+  transition: all 0.3s ease;
+  background: var(--second-text-color);
+  align-items: center;
 }
 
-.header-title {
+.logo {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: var(--first-text-color);
+  text-shadow: 2px 2px 3px black;
+}
+
+.navlist {
+  display: flex;
+  column-gap: 45px;
+}
+
+.navlist a {
+  color: var(--first-text-color);
+  font-weight: 600;
+  font-size: var(--normal-font);
+  padding: 10px 0px;
+  transition: all 0.3s ease;
+
+  display: inline-block;
+}
+
+.navlist a:hover {
+  color: var(--main-color);
+  transform: scale(1.3);
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.header-icons i {
+  font-size: 32px;
+  color: var(--first-text-color);
+  transition: all 0.3s ease;
+  text-shadow: 1px 1px 2px black;
+}
+
+.header-icons i:hover {
+  color: var(--main-color);
+  transform: rotate3d(1, 2, 3, 10deg) scale(1.2);
+}
+
+#menu-icon {
+  font-size: 32px;
+  color: var(--first-text-color);
+  margin-right: 20px;
+  z-index: 1001;
+  display: none;
+}
+
+/* .header-title {
   font-weight: bold;
   font-size: 1.5rem;
 }
@@ -29,4 +87,4 @@
 .header-item:nth-child(2),
 .header-item:nth-child(3) {
   margin-right: 40px;
-}
+} */
