@@ -7,7 +7,7 @@ header {
   justify-content: space-between;
   padding: 20px 14%;
   transition: all 0.3s ease;
-  background: var(--second-text-color);
+  background: transparent;
   align-items: center;
 }
 
