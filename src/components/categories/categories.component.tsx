@@ -6,9 +6,14 @@ import axios from 'axios'
 // Utilities
 import Category from '../../types/category.types'
 
-// Styles
-import './categories.styles.css'
 import CategoryItem from '../category-item/category-item.component'
+
+// Styles
+import {
+  CategoriesContainer,
+  CategoriesContent,
+  TextCenter
+} from './categories.styles'
 
 const Categories: FunctionComponent = () => {
   const [categories, setCategories] = useState<Category[]>([])
@@ -34,16 +39,18 @@ const Categories: FunctionComponent = () => {
 
   return (
     <>
-      <div className="text-center"><h2>Categories</h2></div>
-      <div className="categories-container">
-        <div className="categories-content">
+      <TextCenter>
+        <h2>Categories</h2>
+      </TextCenter>
+      <CategoriesContainer>
+        <CategoriesContent>
           {categories.map((category) => (
             <div key={category.id}>
               <CategoryItem category={category} />
             </div>
           ))}
-        </div>
-      </div>
+        </CategoriesContent>
+      </CategoriesContainer>
     </>
   )
 }
