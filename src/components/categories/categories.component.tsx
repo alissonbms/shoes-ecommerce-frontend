@@ -8,6 +8,7 @@ import Category from '../../types/category.types'
 
 // Styles
 import './categories.styles.css'
+import CategoryItem from '../category-item/category-item.component'
 
 const Categories: FunctionComponent = () => {
   const [categories, setCategories] = useState<Category[]>([])
@@ -33,9 +34,14 @@ const Categories: FunctionComponent = () => {
 
   return (
     <>
+      <div className="text-center"><h2>Categories</h2></div>
       <div className="categories-container">
         <div className="categories-content">
-          {/* {categories.map(category)=> <CategoryItem />} */}
+          {categories.map((category) => (
+            <div key={category.id}>
+              <CategoryItem category={category} />
+            </div>
+          ))}
         </div>
       </div>
     </>

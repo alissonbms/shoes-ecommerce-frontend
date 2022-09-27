@@ -19,16 +19,17 @@
   --h3-font: 2rem;
   --normal-font: 1rem;
 }
+body {
+  color: var(--first-text-color);
+}
 
 /* #root {
   display: flex;
   flex-direction: column;
   height: 100%;
-} */
+} 
 
-body {
-  color: var(--first-text-color);
-}
+
 /* body,
 html {
   height: 100%;
