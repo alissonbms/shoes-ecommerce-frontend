@@ -1,15 +1,19 @@
-import './header.styles.css'
 import { FunctionComponent } from 'react'
-// import { AiOutlineShoppingCart } from 'react-icons/ai'
+
+import {
+  HeaderIcons,
+  HeaderTag,
+  Logo,
+  MenuIcon,
+  Navlist
+} from './header.styles'
 
 const Header: FunctionComponent = () => {
   return (
-    <header>
-      <a href="#" className="logo">
-        StyliShoes
-      </a>
+    <HeaderTag>
+      <Logo href="#">StyliShoes</Logo>
 
-      <ul className="navlist">
+      <Navlist>
         <li>
           <a href="#home">Home</a>
         </li>
@@ -22,15 +26,15 @@ const Header: FunctionComponent = () => {
         <li>
           <a href="#contato">Login</a>
         </li>
-      </ul>
+      </Navlist>
 
-      <div className="header-icons">
+      <HeaderIcons>
         <a href="#">
           <i className="bx bx-cart"></i>
         </a>
-        <div className="bx bx-menu" id="menu-icon"></div>
-      </div>
-    </header>
+        <MenuIcon className="bx bx-menu"></MenuIcon>
+      </HeaderIcons>
+    </HeaderTag>
   )
 }
 
