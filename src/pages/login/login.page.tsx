@@ -2,6 +2,8 @@ import { FunctionComponent } from 'react'
 import { BsGoogle } from 'react-icons/bs'
 import { FiLogIn } from 'react-icons/fi'
 
+import { useForm } from 'react-hook-form'
+
 // Components
 import CustomButton from '../../components/custom-button/custom-button.component'
 import CustomInput from '../../components/custom-input/custom-input.component'
@@ -15,6 +17,16 @@ import {
 } from './login.styes'
 
 const LoginPage: FunctionComponent = () => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit
+  } = useForm()
+
+  const handleSubmitPress = (data: any): void => {
+    console.log({ data })
+  }
+
   return (
     <>
       <Header blackBackground={true} />
@@ -28,15 +40,27 @@ const LoginPage: FunctionComponent = () => {
 
           <LoginInputContainer>
             <p>E-mail</p>
-            <CustomInput placeholder="Entre com a sua conta"></CustomInput>
+            <CustomInput
+              hasError={errors.email != null}
+              placeholder="Entre com a sua conta"
+              {...register('email', { required: true })}></CustomInput>
           </LoginInputContainer>
 
           <LoginInputContainer>
             <p>Senha</p>
-            <CustomInput placeholder="Digite sua senha" />
+            <CustomInput
+              hasError={errors.password != null}
+              placeholder="Digite sua senha"
+              {...register('password', { required: true })}
+            />
           </LoginInputContainer>
 
-          <CustomButton startIcon={<FiLogIn size={18} />}>Entrar</CustomButton>
+          <CustomButton
+            startIcon={<FiLogIn size={18} />}
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises, @typescript-eslint/promise-function-async
+            onClick={() => handleSubmit(handleSubmitPress)()}>
+            Entrar
+          </CustomButton>
         </LoginContent>
       </LoginContainer>
     </>
