@@ -4,6 +4,7 @@ import Fonts from '../../theme/theme.fonts'
 import backgroundImage from '../../assets/background.jpg'
 
 export const HeroTag = styled.section`
+  color: ${Colors.text.white};
   padding: 100px 14%;
   min-height: 100vh;
   width: 100%;
@@ -20,7 +21,7 @@ export const HomeText = styled.div`
     line-height: 1.2;
     letter-spacing: 0.2rem;
     text-shadow: 2px 2px 3px black;
-
+    color: ${Colors.text.white};
     margin-bottom: 1.4rem;
   }
   span {
