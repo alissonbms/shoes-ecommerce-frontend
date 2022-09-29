@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Colors from '../../theme/theme.colors'
 
 interface CategoryItemContainerProps {
   categoryBackground: string
@@ -24,6 +25,7 @@ export const CategoryItemContainer = styled.div<CategoryItemContainerProps>`
   }
 `
 export const CategoryName = styled.div`
+  color: ${Colors.text.white};
   text-align: center;
   background: linear-gradient(50deg, #dd2576, #ff521f);
   opacity: 0.5;
