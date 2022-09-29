@@ -1,8 +1,11 @@
 import styled from 'styled-components'
 import Colors from '../../theme/theme.colors'
 import Fonts from '../../theme/theme.fonts'
+interface HeaderTagProps {
+  blackBackground?: boolean
+}
 
-export const HeaderTag = styled.header`
+export const HeaderTag = styled.header<HeaderTagProps>`
   width: 100%;
   position: absolute;
   top: 0;
@@ -11,7 +14,10 @@ export const HeaderTag = styled.header`
   justify-content: space-between;
   padding: 20px 14%;
   transition: all 0.3s ease;
-  background: transparent;
+  ${(props) =>
+    props.blackBackground === true
+      ? `background: ${Colors.background.dark};`
+      : 'background: transparent;'};
   align-items: center;
 `
 
@@ -38,6 +44,7 @@ export const Navlist = styled.ul`
 
   a:hover {
     color: ${Colors.text.orange};
+    cursor: pointer;
     transform: scale(1.3);
   }
 `

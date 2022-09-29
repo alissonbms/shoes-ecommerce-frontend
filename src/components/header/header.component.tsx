@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import {
   HeaderIcons,
@@ -8,14 +9,24 @@ import {
   Navlist
 } from './header.styles'
 
-const Header: FunctionComponent = () => {
+interface HeaderProps {
+  blackBackground?: boolean
+}
+
+const Header: FunctionComponent<HeaderProps> = ({ blackBackground }) => {
+  const navigate = useNavigate()
+
+  const handleLogin = (): void => {
+    navigate('/login')
+  }
+
   return (
-    <HeaderTag>
+    <HeaderTag blackBackground={blackBackground}>
       <Logo href="#">StyliShoes</Logo>
 
       <Navlist>
         <li>
-          <a href="#home">Home</a>
+          <a href="/">Home</a>
         </li>
         <li>
           <a href="#featured">Categories</a>
@@ -24,7 +35,7 @@ const Header: FunctionComponent = () => {
           <a href="#new">Register</a>
         </li>
         <li>
-          <a href="#contato">Login</a>
+          <a onClick={handleLogin}>Login</a>
         </li>
       </Navlist>
 
