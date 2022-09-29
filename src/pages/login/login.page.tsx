@@ -18,14 +18,19 @@ import {
 } from './login.styes'
 import InputErrorMessage from '../../components/input-error-message/input-error-message.component'
 
+interface LoginForm {
+  email: string
+  password: string
+}
+
 const LoginPage: FunctionComponent = () => {
   const {
     register,
     formState: { errors },
     handleSubmit
-  } = useForm()
+  } = useForm<LoginForm>()
 
-  const handleSubmitPress = (data: any): void => {
+  const handleSubmitPress = (data: LoginForm): void => {
     console.log({ data })
   }
 
@@ -68,6 +73,7 @@ const LoginPage: FunctionComponent = () => {
               hasError={errors.password != null}
               placeholder="Digite sua senha"
               {...register('password', { required: true })}
+              type="password"
             />
 
             {errors?.password?.type === 'required' && (
