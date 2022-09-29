@@ -20,6 +20,10 @@ const Header: FunctionComponent<HeaderProps> = ({ blackBackground }) => {
     navigate('/login')
   }
 
+  const handleSignUp = (): void => {
+    navigate('/sign-up')
+  }
+
   return (
     <HeaderTag blackBackground={blackBackground}>
       <Logo href="#">StyliShoes</Logo>
@@ -32,7 +36,7 @@ const Header: FunctionComponent<HeaderProps> = ({ blackBackground }) => {
           <a href="#featured">Categories</a>
         </li>
         <li>
-          <a href="#new">Register</a>
+          <a onClick={handleSignUp}>Register</a>
         </li>
         <li>
           <a onClick={handleLogin}>Login</a>
