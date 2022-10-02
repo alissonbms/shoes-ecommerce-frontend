@@ -17,6 +17,12 @@ import {
   LoginSubtitle
 } from './login.styes'
 import InputErrorMessage from '../../components/input-error-message/input-error-message.component'
+import {
+  AuthError,
+  AuthErrorCodes,
+  signInWithEmailAndPassword
+} from 'firebase/auth'
+import { auth } from '../../config/firebase.config'
 
 interface LoginForm {
   email: string
@@ -27,11 +33,30 @@ const LoginPage: FunctionComponent = () => {
   const {
     register,
     formState: { errors },
-    handleSubmit
+    handleSubmit,
+    setError
   } = useForm<LoginForm>()
 
-  const handleSubmitPress = (data: LoginForm): void => {
-    console.log({ data })
+  const handleSubmitPress = async (data: LoginForm): Promise<void> => {
+    try {
+      const userCredentials = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      )
+
+      console.log(userCredentials)
+    } catch (error) {
+      const _error = error as AuthError
+
+      if (_error.code === AuthErrorCodes.INVALID_PASSWORD) {
+        return setError('password', { type: 'mismatch' })
+      }
+
+      if (_error.code === AuthErrorCodes.USER_DELETED) {
+        return setError('email', { type: 'notFound' })
+      }
+    }
   }
 
   return (
@@ -65,6 +90,10 @@ const LoginPage: FunctionComponent = () => {
             {errors?.email?.type === 'validate' && (
               <InputErrorMessage>Digite um email válido</InputErrorMessage>
             )}
+
+            {errors?.email?.type === 'notFound' && (
+              <InputErrorMessage>Email incorreto</InputErrorMessage>
+            )}
           </LoginInputContainer>
 
           <LoginInputContainer>
@@ -78,6 +107,10 @@ const LoginPage: FunctionComponent = () => {
 
             {errors?.password?.type === 'required' && (
               <InputErrorMessage>A senha é obrigatória</InputErrorMessage>
+            )}
+
+            {errors?.password?.type === 'mismatch' && (
+              <InputErrorMessage>Senha incorreta</InputErrorMessage>
             )}
           </LoginInputContainer>
 
