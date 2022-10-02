@@ -1,5 +1,9 @@
+/* eslint-disable @typescript-eslint/promise-function-async */
+/* eslint-disable @typescript-eslint/no-misused-promises */
+import { signOut } from 'firebase/auth'
 import { FunctionComponent } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { auth } from '../../config/firebase.config'
 
 import {
   HeaderIcons,
@@ -40,6 +44,9 @@ const Header: FunctionComponent<HeaderProps> = ({ blackBackground }) => {
         </li>
         <li>
           <a onClick={handleLogin}>Login</a>
+        </li>
+        <li>
+          <a onClick={() => signOut(auth)}>Sair</a>
         </li>
       </Navlist>
 
