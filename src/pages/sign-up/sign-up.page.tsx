@@ -1,11 +1,18 @@
 import { FunctionComponent } from 'react'
 import { FiLogIn } from 'react-icons/fi'
 import { useForm } from 'react-hook-form'
+import validator from 'validator'
+import {
+  createUserWithEmailAndPassword,
+  AuthErrorCodes,
+  AuthError
+} from 'firebase/auth'
 
 // Components
 import CustomButton from '../../components/custom-button/custom-button.component'
 import CustomInput from '../../components/custom-input/custom-input.component'
 import Header from '../../components/header/header.component'
+import InputErrorMessage from '../../components/input-error-message/input-error-message.component'
 
 // Styles
 import {
@@ -14,9 +21,8 @@ import {
   SignUpHeadline,
   SignUpInputContainer
 } from './sign-up.styles'
-import InputErrorMessage from '../../components/input-error-message/input-error-message.component'
-import validator from 'validator'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+
+// Utilities
 import { auth, db } from '../../config/firebase.config'
 import { addDoc, collection } from 'firebase/firestore'
 
@@ -33,7 +39,8 @@ const SignUpPage: FunctionComponent = () => {
     register,
     formState: { errors },
     handleSubmit,
-    watch
+    watch,
+    setError
   } = useForm<SignUpForm>()
 
   const watchPassword = watch('password')
@@ -53,7 +60,11 @@ const SignUpPage: FunctionComponent = () => {
         email: userCredentials.user.email
       })
     } catch (error) {
-      console.log(error)
+      const _error = error as AuthError
+
+      if (_error.code === AuthErrorCodes.EMAIL_EXISTS) {
+        setError('email', { type: 'alreadyInUse' })
+      }
     }
   }
 
@@ -109,6 +120,10 @@ const SignUpPage: FunctionComponent = () => {
             {errors?.email?.type === 'validate' && (
               <InputErrorMessage>Digite um email válido</InputErrorMessage>
             )}
+
+            {errors?.email?.type === 'alreadyInUse' && (
+              <InputErrorMessage>Email já em uso</InputErrorMessage>
+            )}
           </SignUpInputContainer>
 
           <SignUpInputContainer>
@@ -117,12 +132,15 @@ const SignUpPage: FunctionComponent = () => {
               hasError={errors.password != null}
               placeholder="Digite sua senha"
               type="password"
-              {...register('password', { required: true })}
-              minLength={6}
+              {...register('password', { required: true, minLength: 6 })}
             />
 
             {errors?.password?.type === 'required' && (
               <InputErrorMessage>A senha é obrigatória</InputErrorMessage>
+            )}
+
+            {errors?.password?.type === 'minLength' && (
+              <InputErrorMessage>Mínimo de 6 caracteres</InputErrorMessage>
             )}
           </SignUpInputContainer>
 
