@@ -5,6 +5,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { getDocs, collection, where, query } from 'firebase/firestore'
 import { FunctionComponent, useContext, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Loading } from './components/loading/loading.component'
 
 // Utilities
 import { auth, db } from './config/firebase.config'
@@ -44,7 +45,7 @@ const App: FunctionComponent = () => {
     return setIsInitializing(false)
   })
 
-  if (isInitializing) return <h1>Loading..</h1>
+  if (isInitializing) return <Loading />
 
   return (
     <BrowserRouter>
