@@ -1,4 +1,5 @@
-import { FunctionComponent } from 'react'
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+import { FunctionComponent, useContext, useEffect } from 'react'
 import { FiLogIn } from 'react-icons/fi'
 import { useForm } from 'react-hook-form'
 import validator from 'validator'
@@ -25,6 +26,8 @@ import {
 // Utilities
 import { auth, db } from '../../config/firebase.config'
 import { addDoc, collection } from 'firebase/firestore'
+import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../../contexts/user.context'
 
 interface SignUpForm {
   firstName: string
@@ -42,6 +45,16 @@ const SignUpPage: FunctionComponent = () => {
     watch,
     setError
   } = useForm<SignUpForm>()
+
+  const navigate = useNavigate()
+
+  const { isAuthenticated } = useContext(UserContext)
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/')
+    }
+  }, [isAuthenticated])
 
   const watchPassword = watch('password')
 

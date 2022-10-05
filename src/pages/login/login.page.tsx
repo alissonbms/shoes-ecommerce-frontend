@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/promise-function-async */
 
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect, useContext } from 'react'
 import { BsGoogle } from 'react-icons/bs'
 import { FiLogIn } from 'react-icons/fi'
 import { useForm } from 'react-hook-form'
@@ -32,6 +32,8 @@ import {
 
 // Utilities
 import { auth, googleProvider, db } from '../../config/firebase.config'
+import { UserContext } from '../../contexts/user.context'
+import { useNavigate } from 'react-router-dom'
 
 interface LoginForm {
   email: string
@@ -45,6 +47,16 @@ const LoginPage: FunctionComponent = () => {
     handleSubmit,
     setError
   } = useForm<LoginForm>()
+
+  const navigate = useNavigate()
+
+  const { isAuthenticated } = useContext(UserContext)
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/')
+    }
+  }, [isAuthenticated])
 
   const handleSubmitPress = async (data: LoginForm): Promise<void> => {
     try {
