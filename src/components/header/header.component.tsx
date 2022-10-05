@@ -1,10 +1,15 @@
 /* eslint-disable @typescript-eslint/promise-function-async */
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { signOut } from 'firebase/auth'
-import { FunctionComponent } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { auth } from '../../config/firebase.config'
 
+import { signOut } from 'firebase/auth'
+import { FunctionComponent, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+// Utilities
+import { auth } from '../../config/firebase.config'
+import { UserContext } from '../../contexts/user.context'
+
+// Styles
 import {
   HeaderIcons,
   HeaderTag,
@@ -14,11 +19,13 @@ import {
 } from './header.styles'
 
 interface HeaderProps {
-  blackBackground?: boolean
+  personalizedBackground?: boolean
 }
 
-const Header: FunctionComponent<HeaderProps> = ({ blackBackground }) => {
+const Header: FunctionComponent<HeaderProps> = ({ personalizedBackground }) => {
   const navigate = useNavigate()
+
+  const { isAuthenticated } = useContext(UserContext)
 
   const handleLogin = (): void => {
     navigate('/login')
@@ -29,7 +36,7 @@ const Header: FunctionComponent<HeaderProps> = ({ blackBackground }) => {
   }
 
   return (
-    <HeaderTag blackBackground={blackBackground}>
+    <HeaderTag personalizedBackground={personalizedBackground}>
       <Logo href="#">StyliShoes</Logo>
 
       <Navlist>
@@ -39,15 +46,21 @@ const Header: FunctionComponent<HeaderProps> = ({ blackBackground }) => {
         <li>
           <a href="#featured">Categories</a>
         </li>
-        <li>
-          <a onClick={handleSignUp}>Register</a>
-        </li>
-        <li>
-          <a onClick={handleLogin}>Login</a>
-        </li>
-        <li>
-          <a onClick={() => signOut(auth)}>Sair</a>
-        </li>
+        {!isAuthenticated && (
+          <>
+            <li>
+              <a onClick={handleSignUp}>Register</a>
+            </li>
+            <li>
+              <a onClick={handleLogin}>Login</a>
+            </li>
+          </>
+        )}
+        {isAuthenticated && (
+          <li>
+            <a onClick={() => signOut(auth)}>Sair</a>
+          </li>
+        )}
       </Navlist>
 
       <HeaderIcons>

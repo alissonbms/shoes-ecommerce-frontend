@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import Colors from '../../theme/theme.colors'
 import Fonts from '../../theme/theme.fonts'
 interface HeaderTagProps {
-  blackBackground?: boolean
+  personalizedBackground?: boolean
 }
 
 export const HeaderTag = styled.header<HeaderTagProps>`
@@ -15,9 +15,9 @@ export const HeaderTag = styled.header<HeaderTagProps>`
   padding: 20px 14%;
   transition: all 0.3s ease;
   ${(props) =>
-    props.blackBackground === true
-      ? `background: ${Colors.background.dark};`
-      : 'background: transparent;'};
+    props.personalizedBackground === true
+      ? 'background: transparent;'
+      : `background: ${Colors.background.dark};`};
   align-items: center;
 `
 

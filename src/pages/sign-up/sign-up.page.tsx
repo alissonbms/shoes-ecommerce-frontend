@@ -71,7 +71,7 @@ const SignUpPage: FunctionComponent = () => {
 
   return (
     <>
-      <Header blackBackground={true} />
+      <Header />
 
       <SignUpContainer>
         <SignUpContent>

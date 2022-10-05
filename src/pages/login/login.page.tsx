@@ -100,7 +100,7 @@ const LoginPage: FunctionComponent = () => {
 
   return (
     <>
-      <Header blackBackground={true} />
+      <Header />
       <LoginContainer>
         <LoginContent>
           <LoginHeadline>Entre com a sua conta</LoginHeadline>
