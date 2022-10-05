@@ -30,9 +30,9 @@ const App: FunctionComponent = () => {
     if (!isAuthenticated && user) {
       const querySnapshot = await getDocs(
         query(
-          collection(db, 'users'),
+          collection(db, 'users').withConverter(userConverter),
           where('id', '==', user.uid)
-        ).withConverter(userConverter)
+        )
       )
       const userFromFirestore = querySnapshot.docs[0]?.data()
       login(userFromFirestore)
