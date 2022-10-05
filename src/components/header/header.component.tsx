@@ -27,6 +27,10 @@ const Header: FunctionComponent<HeaderProps> = ({ personalizedBackground }) => {
 
   const { isAuthenticated } = useContext(UserContext)
 
+  const handleHome = (): void => {
+    navigate('/')
+  }
+
   const handleLogin = (): void => {
     navigate('/login')
   }
@@ -37,7 +41,7 @@ const Header: FunctionComponent<HeaderProps> = ({ personalizedBackground }) => {
 
   return (
     <HeaderTag personalizedBackground={personalizedBackground}>
-      <Logo href="#">StyliShoes</Logo>
+      <Logo onClick={handleHome}>StyliShoes</Logo>
 
       <Navlist>
         <li>

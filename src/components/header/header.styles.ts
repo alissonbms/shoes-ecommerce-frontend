@@ -27,6 +27,10 @@ export const Logo = styled.a`
   letter-spacing: 5px;
   color: ${Colors.text.white};
   text-shadow: 2px 2px 3px black;
+
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 export const Navlist = styled.ul`
