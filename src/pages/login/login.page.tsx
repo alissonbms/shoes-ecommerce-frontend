@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/promise-function-async */
 
-import { FunctionComponent, useEffect, useContext } from 'react'
+import { FunctionComponent, useEffect, useContext, useState } from 'react'
 import { BsGoogle } from 'react-icons/bs'
 import { FiLogIn } from 'react-icons/fi'
 import { useForm } from 'react-hook-form'
@@ -34,6 +34,7 @@ import {
 import { auth, googleProvider, db } from '../../config/firebase.config'
 import { UserContext } from '../../contexts/user.context'
 import { useNavigate } from 'react-router-dom'
+import { Loading } from '../../components/loading/loading.component'
 
 interface LoginForm {
   email: string
@@ -48,6 +49,8 @@ const LoginPage: FunctionComponent = () => {
     setError
   } = useForm<LoginForm>()
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const navigate = useNavigate()
 
   const { isAuthenticated } = useContext(UserContext)
@@ -60,6 +63,8 @@ const LoginPage: FunctionComponent = () => {
 
   const handleSubmitPress = async (data: LoginForm): Promise<void> => {
     try {
+      setIsLoading(true)
+
       const userCredentials = await signInWithEmailAndPassword(
         auth,
         data.email,
@@ -77,11 +82,15 @@ const LoginPage: FunctionComponent = () => {
       if (_error.code === AuthErrorCodes.USER_DELETED) {
         return setError('email', { type: 'notFound' })
       }
+    } finally {
+      setIsLoading(false)
     }
   }
 
   const handleSignInWithGoogleProvider = async (): Promise<void> => {
     try {
+      setIsLoading(true)
+
       const userCredentials = await signInWithPopup(auth, googleProvider)
 
       const querySnapshot = await getDocs(
@@ -107,12 +116,15 @@ const LoginPage: FunctionComponent = () => {
       }
     } catch (error) {
       console.log(error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
   return (
     <>
       <Header />
+      {isLoading && <Loading />}
       <LoginContainer>
         <LoginContent>
           <LoginHeadline>Entre com a sua conta</LoginHeadline>
