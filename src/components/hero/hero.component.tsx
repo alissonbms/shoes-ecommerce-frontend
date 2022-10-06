@@ -1,7 +1,13 @@
 import { FunctionComponent } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { HeroTag, HomeText, Button } from './hero.styles'
 
 const Hero: FunctionComponent = () => {
+  const navigate = useNavigate()
+
+  const handleFeaturedItemsPage = (): void => {
+    navigate('/featured-items')
+  }
   return (
     <HeroTag>
       <HomeText>
@@ -10,7 +16,7 @@ const Hero: FunctionComponent = () => {
           <span>and stylish</span>
         </h1>
         <p>Because what you wear has always been important</p>
-        <Button href="#">View featured items</Button>
+        <Button onClick={handleFeaturedItemsPage}>View featured items</Button>
       </HomeText>
     </HeroTag>
   )

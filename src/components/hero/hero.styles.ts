@@ -49,5 +49,6 @@ export const Button = styled.a`
 
   &:hover {
     transform: translateY(-10px);
+    cursor: pointer;
   }
 `
