@@ -9,6 +9,7 @@ import { Container } from './featured-overview.styles'
 
 // Components
 import { Loading } from '../loading/loading.component'
+import CategoryFeaturedProducts from '../category-featured-products/category-featured-products.component'
 
 const FeaturedOverview: FunctionComponent = () => {
   const { categories, isLoading, fetchCategories } = useContext(CategoryContext)
@@ -24,7 +25,7 @@ const FeaturedOverview: FunctionComponent = () => {
   return (
     <Container>
       {categories.map((category: Category) => (
-        <p key={category.id}>{category.name}</p>
+        <CategoryFeaturedProducts key={category.id} category={category} />
       ))}
     </Container>
   )
