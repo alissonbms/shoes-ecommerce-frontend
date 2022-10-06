@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { FunctionComponent, useContext, useEffect } from 'react'
+import { FunctionComponent, useContext, useEffect, useState } from 'react'
 import { FiLogIn } from 'react-icons/fi'
 import { useForm } from 'react-hook-form'
 import validator from 'validator'
@@ -28,6 +28,7 @@ import { auth, db } from '../../config/firebase.config'
 import { addDoc, collection } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../contexts/user.context'
+import { Loading } from '../../components/loading/loading.component'
 
 interface SignUpForm {
   firstName: string
@@ -46,6 +47,8 @@ const SignUpPage: FunctionComponent = () => {
     setError
   } = useForm<SignUpForm>()
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const navigate = useNavigate()
 
   const { isAuthenticated } = useContext(UserContext)
@@ -60,6 +63,8 @@ const SignUpPage: FunctionComponent = () => {
 
   const handleSubmitPress = async (data: SignUpForm): Promise<void> => {
     try {
+      setIsLoading(true)
+
       const userCredentials = await createUserWithEmailAndPassword(
         auth,
         data.email,
@@ -79,13 +84,15 @@ const SignUpPage: FunctionComponent = () => {
       if (_error.code === AuthErrorCodes.EMAIL_EXISTS) {
         setError('email', { type: 'alreadyInUse' })
       }
+    } finally {
+      setIsLoading(false)
     }
   }
 
   return (
     <>
       <Header />
-
+      {isLoading && <Loading />}
       <SignUpContainer>
         <SignUpContent>
           <SignUpHeadline>Crie sua conta</SignUpHeadline>

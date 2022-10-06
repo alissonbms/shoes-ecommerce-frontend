@@ -10,5 +10,4 @@ export const Loading: FunctionComponent = () => {
       <PulseLoader size={30} color={'#ff521f'} />
     </LoadingContainer>
   )
-  //   HashLoader
 }
