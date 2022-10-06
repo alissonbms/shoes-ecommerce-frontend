@@ -1,9 +1,8 @@
-import { FunctionComponent, useEffect, useState } from 'react'
+import { FunctionComponent, useContext, useEffect } from 'react'
 
-// Utilities
-import Category from '../../types/category.types'
-
+// Components
 import CategoryItem from '../category-item/category-item.component'
+import { Loading } from '../loading/loading.component'
 
 // Styles
 import {
@@ -11,33 +10,18 @@ import {
   CategoriesContent,
   TextCenter
 } from './categories.styles'
-import { getDocs, collection } from 'firebase/firestore'
-import { db } from '../../config/firebase.config'
-import { categoryConverter } from '../../converters/firestore.converters'
+
+// Utilities
+import { CategoryContext } from '../../contexts/category.context'
 
 const Categories: FunctionComponent = () => {
-  const [categories, setCategories] = useState<Category[]>([])
+  const { categories, isLoading, fetchCategories } = useContext(CategoryContext)
 
-  const fetchCategories = async (): Promise<void> => {
-    try {
-      const querySnapshot = await getDocs(
-        collection(db, 'categories').withConverter(categoryConverter)
-      )
-
-      const categoriesFromFirebase: Category[] = []
-
-      querySnapshot.forEach((doc) => categoriesFromFirebase.push(doc.data()))
-      setCategories(categoriesFromFirebase)
-    } catch (error) {
-      console.log({ error })
-    }
-  }
-
-  // array vazia [] = executar tal código assim
-  // que o componete Categories for renderizado
   useEffect(() => {
     void fetchCategories()
   }, [])
+
+  if (isLoading) return <Loading />
 
   return (
     <>
