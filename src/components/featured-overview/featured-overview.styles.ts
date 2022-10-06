@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  /* background-color: blue; */
-  padding: 100px 40px 20px 40px;
+  padding: 80px 80px 10px 75px;
   // top right down left
 `

@@ -1,11 +1,15 @@
 import { FunctionComponent } from 'react'
-import Category from '../../types/category.types'
+
+// Styles
 import {
   CategoryContainer,
   CategoryTitle,
   ProductsContainer
 } from './category-featured-products.styles'
 
+// Utilities
+import Category from '../../types/category.types'
+import FeaturedProduct from '../featured-product/featured-product.component'
 interface CategoryFeaturedProductsProps {
   category: Category
 }
@@ -16,7 +20,11 @@ const CategoryFeaturedProducts: FunctionComponent<
   return (
     <CategoryContainer>
       <CategoryTitle>{category.name}</CategoryTitle>
-      <ProductsContainer>aa</ProductsContainer>
+      <ProductsContainer>
+        {category.products.slice(0, 5).map((product) => (
+          <FeaturedProduct key={product.id} product={product} />
+        ))}
+      </ProductsContainer>
     </CategoryContainer>
   )
 }
