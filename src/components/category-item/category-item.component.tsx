@@ -12,8 +12,8 @@ const CategoryItem: FunctionComponent<CategoryItemProps> = ({ category }) => {
         <p>{category.name}</p>
         <p>
           {category.products.length > 1
-            ? `${category.products.length} items`
-            : `${category.products.length} item`}
+            ? `${category.products.length} products`
+            : `${category.products.length} product`}
         </p>
       </CategoryName>
     </CategoryItemContainer>
