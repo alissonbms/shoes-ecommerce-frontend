@@ -11,22 +11,22 @@ export const ProductContainer = styled.div`
 
 export const ProductInfo = styled.div`
   display: flex;
-  margin-top: 9px;
-  column-gap: 5px;
   justify-content: space-between;
+  margin-top: 5px;
+
   p {
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 500;
   }
 `
 
 export const ProductImage = styled.div<ProductImageProps>`
   background-image: ${(props) => `url('${props.imageUrl}')`};
-  height: 320px;
-  width: 290px;
+  height: 380px;
+  width: 300px;
   background-size: cover;
-  border-radius: 10px;
   background-repeat: no-repeat;
   background-position: center;
-  box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `

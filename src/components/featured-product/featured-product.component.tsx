@@ -20,6 +20,7 @@ const FeaturedProduct: FunctionComponent<FeaturedProductProps> = ({
   return (
     <ProductContainer>
       <ProductImage imageUrl={product.imageUrl} />
+
       <ProductInfo>
         <p>{product.name}</p>
         <p>R${product.price}</p>

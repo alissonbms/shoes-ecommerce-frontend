@@ -5,8 +5,8 @@ import { HeroTag, HomeText, Button } from './hero.styles'
 const Hero: FunctionComponent = () => {
   const navigate = useNavigate()
 
-  const handleFeaturedItemsPage = (): void => {
-    navigate('/featured-items')
+  const handleFeaturedProductsPage = (): void => {
+    navigate('featured-products')
   }
   return (
     <HeroTag>
@@ -16,7 +16,7 @@ const Hero: FunctionComponent = () => {
           <span>and stylish</span>
         </h1>
         <p>Because what you wear has always been important</p>
-        <Button onClick={handleFeaturedItemsPage}>
+        <Button onClick={handleFeaturedProductsPage}>
           View featured products
         </Button>
       </HomeText>

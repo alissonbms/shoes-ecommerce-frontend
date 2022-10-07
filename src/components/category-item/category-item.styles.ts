@@ -19,16 +19,12 @@ export const CategoryItemContainer = styled.div<CategoryItemContainerProps>`
   background-blend-mode: color;
   transition: all 0.5s ease;
   background-image: ${(props) => `url(${props.categoryBackground})`};
-
-  &:hover {
-    transform: scale(0.9);
-  }
 `
 export const CategoryName = styled.div`
   color: ${Colors.text.white};
   text-align: center;
   background: linear-gradient(50deg, #dd2576, #ff521f);
-  opacity: 0.5;
+  opacity: 0.8;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-right: 30px;
@@ -40,7 +36,6 @@ export const CategoryName = styled.div`
 
   &:hover {
     cursor: pointer;
-    background: linear-gradient(50deg, #dd2576, #ff521f);
     opacity: 1;
   }
 
