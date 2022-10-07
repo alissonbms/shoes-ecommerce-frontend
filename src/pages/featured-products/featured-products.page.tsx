@@ -4,7 +4,7 @@ import FeaturedOverview from '../../components/featured-overview/featured-overvi
 // Components
 import Header from '../../components/header/header.component'
 
-const FeaturedItemsPage: FunctionComponent = () => {
+const FeaturedProductsPage: FunctionComponent = () => {
   return (
     <>
       <Header />
@@ -13,4 +13,4 @@ const FeaturedItemsPage: FunctionComponent = () => {
   )
 }
 
-export default FeaturedItemsPage
+export default FeaturedProductsPage

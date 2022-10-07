@@ -12,7 +12,7 @@ export const HeaderTag = styled.header<HeaderTagProps>`
   right: 0;
   display: flex;
   justify-content: space-between;
-  padding: 20px 14%;
+  padding: 20px 50px;
   transition: all 0.3s ease;
   ${(props) =>
     props.personalizedBackground === true

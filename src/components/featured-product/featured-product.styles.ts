@@ -11,7 +11,7 @@ export const ProductContainer = styled.div`
 
 export const ProductInfo = styled.div`
   display: flex;
-  margin-top: 5px;
+  margin-top: 9px;
   column-gap: 5px;
   justify-content: space-between;
   p {
@@ -22,8 +22,8 @@ export const ProductInfo = styled.div`
 
 export const ProductImage = styled.div<ProductImageProps>`
   background-image: ${(props) => `url('${props.imageUrl}')`};
-  height: 220px;
-  width: 330px;
+  height: 320px;
+  width: 290px;
   background-size: cover;
   border-radius: 10px;
   background-repeat: no-repeat;

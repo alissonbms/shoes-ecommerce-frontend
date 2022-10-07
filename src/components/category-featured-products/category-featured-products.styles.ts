@@ -16,8 +16,8 @@ export const CategoryTitle = styled.p`
   border-radius: 6px;
   color: ${Colors.text.dark};
   width: 100%;
-  font-size: 2rem;
-  letter-spacing: 2px;
+  font-size: 1.8rem;
+  letter-spacing: 5px;
   font-weight: 500;
   margin-bottom: 5px;
 `

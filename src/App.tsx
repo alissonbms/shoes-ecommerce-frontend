@@ -11,7 +11,7 @@ import { Loading } from './components/loading/loading.component'
 import { auth, db } from './config/firebase.config'
 import { UserContext } from './contexts/user.context'
 import { userConverter } from './converters/firestore.converters'
-import FeaturedItemsPage from './pages/featured-items/featured-items.page'
+import FeaturedProductsPage from './pages/featured-products/featured-products.page'
 
 // Pages
 import HomePage from './pages/home/Home.page'
@@ -54,7 +54,7 @@ const App: FunctionComponent = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/featured-items" element={<FeaturedItemsPage />} />
+        <Route path="/featured-items" element={<FeaturedProductsPage />} />
       </Routes>
     </BrowserRouter>
   )
