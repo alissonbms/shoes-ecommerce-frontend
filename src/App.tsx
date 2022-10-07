@@ -5,7 +5,10 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { getDocs, collection, where, query } from 'firebase/firestore'
 import { FunctionComponent, useContext, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+// Components
 import { Loading } from './components/loading/loading.component'
+import Cart from './components/cart/cart.component'
 
 // Utilities
 import { auth, db } from './config/firebase.config'
@@ -58,6 +61,9 @@ const App: FunctionComponent = () => {
         <Route path="/featured-products" element={<FeaturedProductsPage />} />
         <Route path="/category/:id" element={<ProductsOfCategoryPage />} />
       </Routes>
+
+      {/* Global Components - usados na aplicação inteira */}
+      <Cart />
     </BrowserRouter>
   )
 }

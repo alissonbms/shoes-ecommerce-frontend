@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 // Utilities
 import { auth } from '../../config/firebase.config'
+import { CartContext } from '../../contexts/cart.context'
 import { UserContext } from '../../contexts/user.context'
 
 // Styles
@@ -23,6 +24,8 @@ interface HeaderProps {
 }
 
 const Header: FunctionComponent<HeaderProps> = ({ personalizedBackground }) => {
+  const { toggleCart } = useContext(CartContext)
+
   const navigate = useNavigate()
 
   const { isAuthenticated } = useContext(UserContext)
@@ -68,7 +71,7 @@ const Header: FunctionComponent<HeaderProps> = ({ personalizedBackground }) => {
       </Navlist>
 
       <HeaderIcons>
-        <a href="#">
+        <a onClick={toggleCart}>
           <i className="bx bx-cart"></i>
         </a>
         <MenuIcon className="bx bx-menu"></MenuIcon>

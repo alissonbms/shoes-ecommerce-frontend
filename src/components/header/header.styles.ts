@@ -7,7 +7,7 @@ interface HeaderTagProps {
 
 export const HeaderTag = styled.header<HeaderTagProps>`
   width: 100%;
-  position: absolute;
+
   top: 0;
   right: 0;
   display: flex;
@@ -16,8 +16,8 @@ export const HeaderTag = styled.header<HeaderTagProps>`
   transition: all 0.3s ease;
   ${(props) =>
     props.personalizedBackground === true
-      ? 'background: transparent;'
-      : `background: ${Colors.background.dark};`};
+      ? 'background: transparent; position: absolute;'
+      : `background: ${Colors.background.dark}; position: initial;`};
   align-items: center;
 `
 
