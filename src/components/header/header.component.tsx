@@ -24,7 +24,7 @@ interface HeaderProps {
 }
 
 const Header: FunctionComponent<HeaderProps> = ({ personalizedBackground }) => {
-  const { toggleCart } = useContext(CartContext)
+  const { toggleCart, totalQuantity } = useContext(CartContext)
 
   const navigate = useNavigate()
 
@@ -72,6 +72,7 @@ const Header: FunctionComponent<HeaderProps> = ({ personalizedBackground }) => {
 
       <HeaderIcons>
         <a onClick={toggleCart}>
+          {totalQuantity > 0 && <span>{totalQuantity}</span>}
           <i className="bx bx-cart"></i>
         </a>
         <MenuIcon className="bx bx-menu"></MenuIcon>

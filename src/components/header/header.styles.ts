@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import Colors from '../../theme/theme.colors'
-import Fonts from '../../theme/theme.fonts'
 interface HeaderTagProps {
   personalizedBackground?: boolean
 }
@@ -40,7 +39,7 @@ export const Navlist = styled.ul`
   a {
     color: ${Colors.text.white};
     font-weight: 600;
-    font-size: ${Fonts.normalFont};
+    font-size: 18px;
     padding: 10px 0px;
     transition: all 0.3s ease;
     display: inline-block;
@@ -58,16 +57,40 @@ export const HeaderIcons = styled.div`
   align-items: center;
   column-gap: 20px;
 
+  a {
+    transition: all 0.3s ease;
+    position: relative;
+
+    &:hover {
+      transform: rotate3d(1, 2, 3, 10deg) scale(1.2);
+    }
+  }
+
+  span {
+    position: absolute;
+    background-color: ${Colors.text.orange};
+    color: ${Colors.text.white};
+    border-radius: 35%;
+    right: -15%;
+    top: -10%;
+    width: 1.2rem;
+    height: 1.2rem;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+  }
+
   i {
-    font-size: 32px;
+    font-size: 40px;
     color: ${Colors.text.white};
     transition: all 0.3s ease;
     text-shadow: 1px 1px 2px black;
-  }
-
-  i:hover {
-    color: ${Colors.text.orange};
-    transform: rotate3d(1, 2, 3, 10deg) scale(1.2);
+    &:hover {
+      cursor: pointer;
+    }
   }
 `
 

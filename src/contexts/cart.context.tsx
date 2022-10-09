@@ -17,6 +17,7 @@ interface CartContextProps {
   increaseProductQuantity: (productId: string) => void
   decreaseProductQuantity: (productId: string) => void
   totalPrice: number
+  totalQuantity: number
 }
 
 export const CartContext = createContext<CartContextProps>({
@@ -27,7 +28,8 @@ export const CartContext = createContext<CartContextProps>({
   removeProductFromCart: (): void => {},
   increaseProductQuantity: (): void => {},
   decreaseProductQuantity: (): void => {},
-  totalPrice: 0
+  totalPrice: 0,
+  totalQuantity: 0
 })
 
 interface ProviderProps {
@@ -42,7 +44,13 @@ export const CartContextProvider: FunctionComponent<ProviderProps> = ({
 
   const totalPrice = useMemo(() => {
     return products.reduce((acc, item) => {
-      return acc + (item.price * item.quantity)
+      return acc + item.price * item.quantity
+    }, 0)
+  }, [products])
+
+  const totalQuantity = useMemo(() => {
+    return products.reduce((acc, item) => {
+      return acc + item.quantity
     }, 0)
   }, [products])
 
@@ -104,7 +112,8 @@ export const CartContextProvider: FunctionComponent<ProviderProps> = ({
         removeProductFromCart,
         increaseProductQuantity,
         decreaseProductQuantity,
-        totalPrice
+        totalPrice,
+        totalQuantity
       }}>
       {children}
     </CartContext.Provider>
