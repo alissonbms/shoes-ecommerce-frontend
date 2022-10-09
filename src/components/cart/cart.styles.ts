@@ -47,3 +47,23 @@ export const CartTotal = styled.p`
   font-size: 1.125rem;
   margin-bottom: 15px;
 `
+export const EmptyCart = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: ${Colors.text.dark};
+  height: 100%;
+  width: 100%;
+  row-gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  svg {
+    font-size: 8rem;
+    color: lightgray;
+  }
+`

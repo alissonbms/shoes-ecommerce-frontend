@@ -1,5 +1,7 @@
+/* eslint-disable multiline-ternary */
 import { FunctionComponent, useContext } from 'react'
 import { BsCartCheck } from 'react-icons/bs'
+import { FaShoppingCart } from 'react-icons/fa'
 
 // Styles
 import {
@@ -7,7 +9,8 @@ import {
   CartContent,
   CartEscapeArea,
   CartTitle,
-  CartTotal
+  CartTotal,
+  EmptyCart
 } from './cart.styles'
 
 // Components
@@ -19,7 +22,7 @@ import { CartContext } from '../../contexts/cart.context'
 import CartProduct from '../../types/cart.types'
 
 const Cart: FunctionComponent = () => {
-  const { isVisible, toggleCart, products, totalPrice } =
+  const { isVisible, toggleCart, products, totalPrice, totalQuantity } =
     useContext(CartContext)
 
   return (
@@ -32,10 +35,19 @@ const Cart: FunctionComponent = () => {
           <CartItem key={product.id} product={product} />
         ))}
 
-        <CartTotal>Total R${totalPrice}</CartTotal>
-        <CustomButton startIcon={<BsCartCheck />}>
-          Ir para checkout
-        </CustomButton>
+        {totalQuantity > 0 ? (
+          <>
+            <CartTotal>Total R${totalPrice}</CartTotal>
+            <CustomButton startIcon={<BsCartCheck />}>
+              Ir para checkout
+            </CustomButton>
+          </>
+        ) : (
+          <EmptyCart>
+            <span>You have shopping to do and shoes to show</span>
+            <FaShoppingCart />
+          </EmptyCart>
+        )}
       </CartContent>
     </CartContainer>
   )
