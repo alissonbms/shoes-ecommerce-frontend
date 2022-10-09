@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   createContext,
   FunctionComponent,
   ReactNode,
+  useEffect,
   useMemo,
   useState
 } from 'react'
@@ -41,6 +43,22 @@ export const CartContextProvider: FunctionComponent<ProviderProps> = ({
 }) => {
   const [isVisible, setIsVisible] = useState(false)
   const [products, setProducts] = useState<CartProduct[]>([])
+
+  useEffect(() => {
+    const productsFromLocalStorage = JSON.parse(
+      localStorage.getItem('cartProducts')!
+      // JSON.parse() só aceita string e
+      // aqui temos um retorno de string ou null
+      // ! = garantir que sempre haverá o retorno de algo
+    )
+    if (productsFromLocalStorage.length > 0) {
+      setProducts(productsFromLocalStorage)
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('cartProducts', JSON.stringify(products))
+  }, [products])
 
   const totalPrice = useMemo(() => {
     return products.reduce((acc, item) => {
