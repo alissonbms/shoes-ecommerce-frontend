@@ -1,4 +1,3 @@
-/* eslint-disable multiline-ternary */
 import { FunctionComponent, useContext } from 'react'
 import { BsCartCheck } from 'react-icons/bs'
 import { FaShoppingCart } from 'react-icons/fa'
@@ -20,10 +19,18 @@ import CartItem from '../cart-item/cart-item.component'
 // Utilities
 import { CartContext } from '../../contexts/cart.context'
 import CartProduct from '../../types/cart.types'
+import { useNavigate } from 'react-router-dom'
 
 const Cart: FunctionComponent = () => {
   const { isVisible, toggleCart, products, totalPrice, totalQuantity } =
     useContext(CartContext)
+
+  const navigate = useNavigate()
+
+  const handleCheckoutPage = (): void => {
+    navigate('/checkout')
+    toggleCart()
+  }
 
   return (
     <CartContainer isVisible={isVisible}>
@@ -37,8 +44,10 @@ const Cart: FunctionComponent = () => {
 
         {totalQuantity > 0 ? (
           <>
-            <CartTotal>Total R${totalPrice}</CartTotal>
-            <CustomButton startIcon={<BsCartCheck />}>
+            <CartTotal>Total: R${totalPrice}</CartTotal>
+            <CustomButton
+              startIcon={<BsCartCheck />}
+              onClick={handleCheckoutPage}>
               Ir para checkout
             </CustomButton>
           </>
