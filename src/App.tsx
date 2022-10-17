@@ -22,6 +22,7 @@ import SignUpPage from './pages/sign-up/sign-up.page'
 import FeaturedProductsPage from './pages/featured-products/featured-products.page'
 import ProductsOfCategoryPage from './pages/products-of-category/products-of-category.page'
 import CheckoutPage from './pages/checkout/checkout.page'
+import Authentication from './guards/authentication.guard'
 
 const App: FunctionComponent = () => {
   const [isInitializing, setIsInitializing] = useState(true)
@@ -61,7 +62,14 @@ const App: FunctionComponent = () => {
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/featured-products" element={<FeaturedProductsPage />} />
         <Route path="/category/:id" element={<ProductsOfCategoryPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route
+          path="/checkout"
+          element={
+            <Authentication>
+              <CheckoutPage />
+            </Authentication>
+          }
+        />
       </Routes>
 
       {/* Global Components - usados na aplicação inteira */}
