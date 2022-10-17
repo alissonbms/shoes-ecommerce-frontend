@@ -23,6 +23,7 @@ import FeaturedProductsPage from './pages/featured-products/featured-products.pa
 import ProductsOfCategoryPage from './pages/products-of-category/products-of-category.page'
 import CheckoutPage from './pages/checkout/checkout.page'
 import Authentication from './guards/authentication.guard'
+import PaymentConfirmationPage from './pages/payment-confirmation/payment-confirmation.page'
 
 const App: FunctionComponent = () => {
   const [isInitializing, setIsInitializing] = useState(true)
@@ -69,6 +70,10 @@ const App: FunctionComponent = () => {
               <CheckoutPage />
             </Authentication>
           }
+        />
+        <Route
+          path="/payment-confirmation"
+          element={<PaymentConfirmationPage />}
         />
       </Routes>
 

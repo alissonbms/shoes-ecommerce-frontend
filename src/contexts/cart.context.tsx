@@ -19,6 +19,7 @@ interface CartContextProps {
   decreaseProductQuantity: (productId: string) => void
   totalPrice: number
   totalQuantity: number
+  clearProducts: () => void
 }
 
 export const CartContext = createContext<CartContextProps>({
@@ -30,7 +31,8 @@ export const CartContext = createContext<CartContextProps>({
   increaseProductQuantity: (): void => {},
   decreaseProductQuantity: (): void => {},
   totalPrice: 0,
-  totalQuantity: 0
+  totalQuantity: 0,
+  clearProducts: () => {}
 })
 
 interface ProviderProps {
@@ -119,6 +121,10 @@ export const CartContextProvider: FunctionComponent<ProviderProps> = ({
     )
   }
 
+  const clearProducts = (): void => {
+    setProducts([])
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -130,7 +136,8 @@ export const CartContextProvider: FunctionComponent<ProviderProps> = ({
         increaseProductQuantity,
         decreaseProductQuantity,
         totalPrice,
-        totalQuantity
+        totalQuantity,
+        clearProducts
       }}>
       {children}
     </CartContext.Provider>
