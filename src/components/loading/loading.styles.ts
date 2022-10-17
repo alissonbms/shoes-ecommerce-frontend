@@ -12,6 +12,7 @@ export const LoadingContainer = styled.div`
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
   flex-direction: column;
+  z-index: 100;
 
   p {
     color: ${Colors.text.white};
