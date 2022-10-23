@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { FunctionComponent, useContext, useEffect, useState } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { FiLogIn } from 'react-icons/fi'
 import { useForm } from 'react-hook-form'
 import validator from 'validator'
@@ -27,7 +28,6 @@ import {
 import { auth, db } from '../../config/firebase.config'
 import { addDoc, collection } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
-import { UserContext } from '../../contexts/user.context'
 import { Loading } from '../../components/loading/loading.component'
 
 interface SignUpForm {
@@ -51,7 +51,9 @@ const SignUpPage: FunctionComponent = () => {
 
   const navigate = useNavigate()
 
-  const { isAuthenticated } = useContext(UserContext)
+  const { isAuthenticated } = useSelector(
+    (rootReducer: any) => rootReducer.userReducer
+  )
 
   useEffect(() => {
     if (isAuthenticated) {

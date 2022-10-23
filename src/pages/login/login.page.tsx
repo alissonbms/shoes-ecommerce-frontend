@@ -2,7 +2,9 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/promise-function-async */
 
-import { FunctionComponent, useEffect, useContext, useState } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+
 import { BsGoogle } from 'react-icons/bs'
 import { FiLogIn } from 'react-icons/fi'
 import { useForm } from 'react-hook-form'
@@ -32,7 +34,6 @@ import {
 
 // Utilities
 import { auth, googleProvider, db } from '../../config/firebase.config'
-import { UserContext } from '../../contexts/user.context'
 import { useNavigate } from 'react-router-dom'
 import { Loading } from '../../components/loading/loading.component'
 
@@ -53,7 +54,9 @@ const LoginPage: FunctionComponent = () => {
 
   const navigate = useNavigate()
 
-  const { isAuthenticated } = useContext(UserContext)
+  const { isAuthenticated } = useSelector(
+    (rootReducer: any) => rootReducer.userReducer
+  )
 
   useEffect(() => {
     if (isAuthenticated) {

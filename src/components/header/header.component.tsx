@@ -3,12 +3,12 @@
 
 import { signOut } from 'firebase/auth'
 import { FunctionComponent, useContext } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // Utilities
 import { auth } from '../../config/firebase.config'
 import { CartContext } from '../../contexts/cart.context'
-import { UserContext } from '../../contexts/user.context'
 
 // Styles
 import {
@@ -26,9 +26,12 @@ interface HeaderProps {
 const Header: FunctionComponent<HeaderProps> = ({ personalizedBackground }) => {
   const { toggleCart, totalQuantity } = useContext(CartContext)
 
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { isAuthenticated } = useContext(UserContext)
+  const { isAuthenticated } = useSelector(
+    (rootReducer: any) => rootReducer.userReducer
+  )
 
   const handleHome = (): void => {
     navigate('/')
@@ -40,6 +43,11 @@ const Header: FunctionComponent<HeaderProps> = ({ personalizedBackground }) => {
 
   const handleSignUp = (): void => {
     navigate('/sign-up')
+  }
+
+  const handleSignOut = async (): Promise<void> => {
+    dispatch({ type: 'LOGOUT_USER' })
+    await signOut(auth)
   }
 
   return (
@@ -65,7 +73,7 @@ const Header: FunctionComponent<HeaderProps> = ({ personalizedBackground }) => {
         )}
         {isAuthenticated && (
           <li>
-            <a onClick={() => signOut(auth)}>Sair</a>
+            <a onClick={handleSignOut}>Sair</a>
           </li>
         )}
       </Navlist>
