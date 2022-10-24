@@ -3,12 +3,13 @@
 
 import { signOut } from 'firebase/auth'
 import { FunctionComponent, useContext } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // Utilities
 import { auth } from '../../config/firebase.config'
 import { CartContext } from '../../contexts/cart.context'
+import { useAppSelector } from '../../hooks/redux.hooks'
 import { logoutUser } from '../../store/reducers/user/user.actions'
 
 // Styles
@@ -30,8 +31,8 @@ const Header: FunctionComponent<HeaderProps> = ({ personalizedBackground }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { isAuthenticated } = useSelector(
-    (rootReducer: any) => rootReducer.userReducer
+  const { isAuthenticated } = useAppSelector(
+    (rootReducer) => rootReducer.userReducer
   )
 
   const handleHome = (): void => {

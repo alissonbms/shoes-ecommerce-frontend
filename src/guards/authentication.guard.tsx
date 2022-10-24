@@ -1,10 +1,12 @@
 import { FunctionComponent, ReactNode, useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // Components
 import Header from '../components/header/header.component'
 import { Loading } from '../components/loading/loading.component'
+
+// Utilities
+import { useAppSelector } from '../hooks/redux.hooks'
 
 interface AuthenticationProps {
   children: ReactNode
@@ -13,8 +15,8 @@ interface AuthenticationProps {
 const Authentication: FunctionComponent<AuthenticationProps> = ({
   children
 }) => {
-  const { isAuthenticated } = useSelector(
-    (rootReducer: any) => rootReducer.userReducer
+  const { isAuthenticated } = useAppSelector(
+    (rootReducer) => rootReducer.userReducer
   )
 
   const navigate = useNavigate()
