@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { auth } from '../../config/firebase.config'
 import { CartContext } from '../../contexts/cart.context'
 import { useAppSelector } from '../../hooks/redux.hooks'
+import { toggleCart } from '../../store/reducers/cart/cart.actions'
 import { logoutUser } from '../../store/reducers/user/user.actions'
 
 // Styles
@@ -26,7 +27,7 @@ interface HeaderProps {
 }
 
 const Header: FunctionComponent<HeaderProps> = ({ personalizedBackground }) => {
-  const { toggleCart, totalQuantity } = useContext(CartContext)
+  const { totalQuantity } = useContext(CartContext)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -50,6 +51,10 @@ const Header: FunctionComponent<HeaderProps> = ({ personalizedBackground }) => {
   const handleSignOut = async (): Promise<void> => {
     dispatch(logoutUser())
     await signOut(auth)
+  }
+
+  const handleCart = (): void => {
+    dispatch(toggleCart())
   }
 
   return (
@@ -81,7 +86,7 @@ const Header: FunctionComponent<HeaderProps> = ({ personalizedBackground }) => {
       </Navlist>
 
       <HeaderIcons>
-        <a onClick={toggleCart}>
+        <a onClick={handleCart}>
           {totalQuantity > 0 && <span>{totalQuantity}</span>}
           <i className="bx bx-cart"></i>
         </a>
