@@ -14,6 +14,7 @@ import Cart from './components/cart/cart.component'
 // Utilities
 import { auth, db } from './config/firebase.config'
 import { userConverter } from './converters/firestore.converters'
+import { logoutUser, loginUser } from './store/reducers/user/user.actions'
 
 // Pages
 import HomePage from './pages/home/Home.page'
@@ -22,8 +23,10 @@ import SignUpPage from './pages/sign-up/sign-up.page'
 import FeaturedProductsPage from './pages/featured-products/featured-products.page'
 import ProductsOfCategoryPage from './pages/products-of-category/products-of-category.page'
 import CheckoutPage from './pages/checkout/checkout.page'
-import Authentication from './guards/authentication.guard'
 import PaymentConfirmationPage from './pages/payment-confirmation/payment-confirmation.page'
+
+// Guards
+import Authentication from './guards/authentication.guard'
 
 const App: FunctionComponent = () => {
   const [isInitializing, setIsInitializing] = useState(true)
@@ -36,7 +39,7 @@ const App: FunctionComponent = () => {
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (isAuthenticated && !user) {
-        dispatch({ type: 'LOGOUT_USER' })
+        dispatch(logoutUser())
 
         return setIsInitializing(false)
       }
@@ -50,7 +53,7 @@ const App: FunctionComponent = () => {
         )
         const userFromFirestore = querySnapshot.docs[0]?.data()
 
-        dispatch({ type: 'LOGIN_USER', payload: userFromFirestore })
+        dispatch(loginUser(userFromFirestore))
 
         return setIsInitializing(false)
       }

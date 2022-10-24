@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 // Utilities
 import { auth } from '../../config/firebase.config'
 import { CartContext } from '../../contexts/cart.context'
+import { logoutUser } from '../../store/reducers/user/user.actions'
 
 // Styles
 import {
@@ -46,7 +47,7 @@ const Header: FunctionComponent<HeaderProps> = ({ personalizedBackground }) => {
   }
 
   const handleSignOut = async (): Promise<void> => {
-    dispatch({ type: 'LOGOUT_USER' })
+    dispatch(logoutUser())
     await signOut(auth)
   }
 
