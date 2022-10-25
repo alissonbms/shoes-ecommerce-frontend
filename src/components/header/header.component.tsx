@@ -2,16 +2,16 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 
 import { signOut } from 'firebase/auth'
-import { FunctionComponent, useContext } from 'react'
+import { FunctionComponent } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // Utilities
 import { auth } from '../../config/firebase.config'
-import { CartContext } from '../../contexts/cart.context'
 import { useAppSelector } from '../../hooks/redux.hooks'
 import { toggleCart } from '../../store/reducers/cart/cart.actions'
 import { logoutUser } from '../../store/reducers/user/user.actions'
+import { selectTotalProductsQuantity } from '../../store/reducers/cart/cart.selectors'
 
 // Styles
 import {
@@ -27,7 +27,7 @@ interface HeaderProps {
 }
 
 const Header: FunctionComponent<HeaderProps> = ({ personalizedBackground }) => {
-  const { totalQuantity } = useContext(CartContext)
+  const totalProductsQuantity = useAppSelector(selectTotalProductsQuantity)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -87,7 +87,7 @@ const Header: FunctionComponent<HeaderProps> = ({ personalizedBackground }) => {
 
       <HeaderIcons>
         <a onClick={handleCart}>
-          {totalQuantity > 0 && <span>{totalQuantity}</span>}
+          {totalProductsQuantity > 0 && <span>{totalProductsQuantity}</span>}
           <i className="bx bx-cart"></i>
         </a>
         <MenuIcon className="bx bx-menu"></MenuIcon>

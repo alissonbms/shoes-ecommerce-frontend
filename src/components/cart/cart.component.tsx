@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext } from 'react'
+import { FunctionComponent } from 'react'
 import { BsCartCheck } from 'react-icons/bs'
 import { FaShoppingCart } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
@@ -19,13 +19,17 @@ import CustomButton from '../custom-button/custom-button.component'
 import CartItem from '../cart-item/cart-item.component'
 
 // Utilities
-import { CartContext } from '../../contexts/cart.context'
 import CartProduct from '../../types/cart.types'
 import { useAppSelector } from '../../hooks/redux.hooks'
 import { toggleCart } from '../../store/reducers/cart/cart.actions'
+import {
+  selectTotalProductsPrice,
+  selectTotalProductsQuantity
+} from '../../store/reducers/cart/cart.selectors'
 
 const Cart: FunctionComponent = () => {
-  const { totalPrice, totalQuantity } = useContext(CartContext)
+  const totalProductsPrice = useAppSelector(selectTotalProductsPrice)
+  const totalProductsQuantity = useAppSelector(selectTotalProductsQuantity)
 
   const { isVisible, products } = useAppSelector((state) => state.cartReducer)
 
@@ -51,9 +55,9 @@ const Cart: FunctionComponent = () => {
           <CartItem key={product.id} product={product} />
         ))}
 
-        {totalQuantity > 0 ? (
+        {totalProductsQuantity > 0 ? (
           <>
-            <CartTotal>Total: R${totalPrice}</CartTotal>
+            <CartTotal>Total: R${totalProductsPrice}</CartTotal>
             <CustomButton
               startIcon={<BsCartCheck />}
               onClick={handleCheckoutPage}>

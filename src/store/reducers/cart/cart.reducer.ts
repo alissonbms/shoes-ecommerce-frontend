@@ -4,15 +4,11 @@ import CartActionsTypes from './cart.actions-types'
 interface InitialState {
   isVisible: boolean
   products: CartProduct[]
-  totalPrice: number
-  totalQuantity: number
 }
 
 const initialState: InitialState = {
   isVisible: false,
-  products: [],
-  totalPrice: 0,
-  totalQuantity: 0
+  products: []
 }
 
 const cartReducer = (state = initialState, action: any): any => {
