@@ -1,6 +1,7 @@
-import { FunctionComponent, useContext, useState } from 'react'
+import { FunctionComponent, useState } from 'react'
 import { FaShoppingCart } from 'react-icons/fa'
 import { BsBagCheck } from 'react-icons/bs'
+import axios from 'axios'
 
 // Styles
 import {
@@ -14,14 +15,17 @@ import { EmptyCart } from '../cart/cart.styles'
 // Components
 import CartItem from '../cart-item/cart-item.component'
 import CustomButton from '../custom-button/custom-button.component'
-
-// Utilities
-import { CartContext } from '../../contexts/cart.context'
-import axios from 'axios'
 import { Loading } from '../loading/loading.component'
 
+// Utilities
+import CartProduct from '../../types/cart.types'
+import { useAppSelector } from '../../hooks/redux.hooks'
+import { selectTotalProductsPrice } from '../../store/reducers/cart/cart.selectors'
+
 const Checkout: FunctionComponent = () => {
-  const { products, totalPrice } = useContext(CartContext)
+  const { products } = useAppSelector((state) => state.cartReducer)
+
+  const totalProductsPrice = useAppSelector(selectTotalProductsPrice)
   const [isLoading, setIsLoading] = useState(false)
 
   const handleFinishPurchase = async (): Promise<void> => {
@@ -49,11 +53,11 @@ const Checkout: FunctionComponent = () => {
         <>
           <CheckoutTitle>Checkout</CheckoutTitle>
           <CheckoutProducts>
-            {products.map((product) => (
+            {products.map((product: CartProduct) => (
               <CartItem key={product.id} product={product} />
             ))}
           </CheckoutProducts>
-          <CheckoutTotal>Total: R${totalPrice}</CheckoutTotal>
+          <CheckoutTotal>Total: R${totalProductsPrice}</CheckoutTotal>
           <CustomButton
             startIcon={<BsBagCheck />}
             onClick={handleFinishPurchase}>
