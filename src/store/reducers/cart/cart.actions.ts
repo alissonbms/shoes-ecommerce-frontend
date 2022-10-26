@@ -1,64 +1,72 @@
 import Product from '../../../types/product.types'
 import CartActionsTypes from './cart.actions-types'
 
-interface ToggleCart {
+interface ToggleCartAction {
   type: typeof CartActionsTypes.toggleCart
 }
 
-export const toggleCart = (): ToggleCart => ({
+export const toggleCart = (): ToggleCartAction => ({
   type: CartActionsTypes.toggleCart
 })
 
-interface AddProductToCart {
+interface AddProductToCartAction {
   type: typeof CartActionsTypes.addProductToCart
   payload: Product
 }
 
-export const addProductToCart = (payload: Product): AddProductToCart => ({
+export const addProductToCart = (payload: Product): AddProductToCartAction => ({
   type: CartActionsTypes.addProductToCart,
   payload
 })
 
-interface RemoveProductFromCart {
+interface RemoveProductFromCartAction {
   type: typeof CartActionsTypes.removeProductFromCart
   payload: string
 }
 
 export const removeProductFromCart = (
   payload: string
-): RemoveProductFromCart => ({
+): RemoveProductFromCartAction => ({
   type: CartActionsTypes.removeProductFromCart,
   payload
 })
 
-interface DecreaseProductQuantity {
+interface DecreaseProductQuantityAction {
   type: typeof CartActionsTypes.decreaseProductQuantity
   payload: string
 }
 
 export const decreaseProductQuantity = (
   payload: string
-): DecreaseProductQuantity => ({
+): DecreaseProductQuantityAction => ({
   type: CartActionsTypes.decreaseProductQuantity,
   payload
 })
 
-interface IncreaseProductQuantity {
+interface IncreaseProductQuantityAction {
   type: typeof CartActionsTypes.increaseProductQuantity
   payload: string
 }
 
 export const increaseProductQuantity = (
   payload: string
-): IncreaseProductQuantity => ({
+): IncreaseProductQuantityAction => ({
   type: CartActionsTypes.increaseProductQuantity,
   payload
 })
 
-interface ClearProducts {
+interface ClearProductsAction {
   type: typeof CartActionsTypes.clearProducts
 }
 
-export const clearProducts = (): ClearProducts => ({
+export const clearProducts = (): ClearProductsAction => ({
   type: CartActionsTypes.clearProducts
 })
+
+export type CartActions =
+  | ToggleCartAction
+  | AddProductToCartAction
+  | RemoveProductFromCartAction
+  | DecreaseProductQuantityAction
+  | IncreaseProductQuantityAction
+  | ClearProductsAction
