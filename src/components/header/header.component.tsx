@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { auth } from '../../config/firebase.config'
 import { useAppSelector } from '../../hooks/redux.hooks'
 import { toggleCart } from '../../store/reducers/cart/cart.actions'
-import { logoutUser } from '../../store/reducers/user/user.actions'
+import { logoutUser } from '../../store/toolkit/user/user.slice'
 import { selectTotalProductsQuantity } from '../../store/reducers/cart/cart.selectors'
 
 // Styles

@@ -14,7 +14,7 @@ import Cart from './components/cart/cart.component'
 // Utilities
 import { auth, db } from './config/firebase.config'
 import { userConverter } from './converters/firestore.converters'
-import { logoutUser, loginUser } from './store/reducers/user/user.actions'
+import { logoutUser, loginUser } from './store/toolkit/user/user.slice'
 import { useAppSelector } from './hooks/redux.hooks'
 
 // Pages
