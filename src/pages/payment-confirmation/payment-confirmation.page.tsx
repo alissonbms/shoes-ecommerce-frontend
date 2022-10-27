@@ -20,7 +20,7 @@ import {
 
 // Utilities
 import Colors from '../../theme/theme.colors'
-import { clearProducts } from '../../store/reducers/cart/cart.actions'
+import { clearProducts } from '../../store/toolkit/cart/cart.slice'
 
 const PaymentConfirmationPage: FunctionComponent = () => {
   const [searchParams] = useSearchParams()

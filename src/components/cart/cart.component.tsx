@@ -21,7 +21,7 @@ import CartItem from '../cart-item/cart-item.component'
 // Utilities
 import CartProduct from '../../types/cart.types'
 import { useAppSelector } from '../../hooks/redux.hooks'
-import { toggleCart } from '../../store/reducers/cart/cart.actions'
+import { toggleCart } from '../../store/toolkit/cart/cart.slice'
 import {
   selectTotalProductsPrice,
   selectTotalProductsQuantity
