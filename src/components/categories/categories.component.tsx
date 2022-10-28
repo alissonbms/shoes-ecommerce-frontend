@@ -1,5 +1,6 @@
 import { FunctionComponent, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import { ThunkDispatch } from 'redux-thunk'
 
 // Components
 import CategoryItem from '../category-item/category-item.component'
@@ -15,15 +16,16 @@ import {
 // Utilities
 import { fetchCategories } from '../../store/toolkit/category/category.slice'
 import { useAppSelector } from '../../hooks/redux.hooks'
+import Category from '../../types/category.types'
 
 const Categories: FunctionComponent = () => {
   const { isLoading, categories } = useAppSelector(
     (state) => state.categoryReducer
   )
-  const dispatch = useDispatch()
+  const dispatch: ThunkDispatch<Category[], void, any> = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchCategories() as any)
+    void dispatch(fetchCategories())
   }, [])
 
   if (isLoading) return <Loading />

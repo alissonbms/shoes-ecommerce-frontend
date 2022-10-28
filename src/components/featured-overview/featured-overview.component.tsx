@@ -1,9 +1,11 @@
 import { FunctionComponent, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import { ThunkDispatch } from 'redux-thunk'
 
 // Utilities
 import { fetchCategories } from '../../store/toolkit/category/category.slice'
 import { useAppSelector } from '../../hooks/redux.hooks'
+import Category from '../../types/category.types'
 
 // Styles
 import { Container } from './featured-overview.styles'
@@ -16,11 +18,11 @@ const FeaturedOverview: FunctionComponent = () => {
   const { isLoading, categories } = useAppSelector(
     (state) => state.categoryReducer
   )
-  const dispatch = useDispatch()
+  const dispatch: ThunkDispatch<Category[], void, any> = useDispatch()
 
   useEffect(() => {
     if (categories.length === 0) {
-      dispatch(fetchCategories() as any)
+      void dispatch(fetchCategories())
     }
   }, [])
 
